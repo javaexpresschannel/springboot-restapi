@@ -12,7 +12,7 @@ pipeline {
                 sh "mvn clean compile"
             }
         }
-        stage('deploy') { 
+        stage('Build') { 
             
             steps {
                 sh "mvn package"
@@ -39,10 +39,10 @@ pipeline {
                 sh 'docker push javaexpress/docker_jenkins_springboot:${BUILD_NUMBER}'
             }
         }
-        stage('Docker deploy'){
+        stage('Docker deploy in Ec2'){
             steps {
                
-                sh 'docker run -itd -p  8081:8080 anvbhaskar/docker_jenkins_springboot:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  8081:8080 javaexpress/docker_jenkins_springboot:${BUILD_NUMBER}'
             }
         }
         stage('Archving') { 
