@@ -5,7 +5,7 @@ pipeline {
      
     }
     stages {
-        stage('Compile and Clean') { 
+        stage('Clean & Compile') { 
             steps {
                 // Run Maven on a Unix agent.
               
@@ -21,8 +21,7 @@ pipeline {
         stage('Build Docker image'){
           
             steps {
-                echo "Hello Java Express"
-                sh 'ls'
+                
                 sh 'docker build -t  javaexpress/docker_jenkins_springboot:${BUILD_NUMBER} .'
             }
         }
